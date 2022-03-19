@@ -1,3 +1,0 @@
-[submodule "ml/tracker/sort"]
-	path = ml/tracker/sort
-	url = https://github.com/abewley/sort.git
