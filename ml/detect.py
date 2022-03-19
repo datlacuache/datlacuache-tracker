@@ -48,7 +48,7 @@ def detect_single_frame(frame, version=None):
     names = results.names
 
     if torch.cuda.device_count():
-        results.xyxyn[0].to('cpu').numpy()
+        results = results.xyxyn[0].cpu().numpy()
     else:
         results = results.xyxyn[0].numpy()
 
