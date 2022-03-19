@@ -17,7 +17,13 @@ def main():
     video = 'assets/clip.mp4'
     logo = 'assets/datlacuache_black.png'
 
-    object_tracking_in_video(video, threshold=0.25, logo_path=logo)
+    object_tracking_in_video(
+        video,
+        tracked_classes=['car', 'truck'],
+        threshold=0.25,
+        logo_path=logo,
+        position='bottom'
+    )
 
 
 if __name__ == '__main__':

@@ -15,7 +15,7 @@ import cv2
 
 from ml.tracker.sort.sort import Sort
 from ml.detect import detect_single_frame
-from ml.tools import process_boxes
+from ml.tools import track_boxes
 
 
 def object_tracking_in_video(video_path, version=None, tracked_classes=None,
@@ -32,6 +32,7 @@ def object_tracking_in_video(video_path, version=None, tracked_classes=None,
             'iou_threshold': 0.25
         }
     
+    global_total = 0
     centroid_tracker = Sort(
         max_age=tracking_params['max_age'],
         min_hits=tracking_params['min_hits'],
@@ -66,17 +67,22 @@ def object_tracking_in_video(video_path, version=None, tracked_classes=None,
         boxes, confidence, classes, names = results
 
         # Process boxes
-        img = process_boxes(
+        img, total = track_boxes(
             img,
             boxes,
             confidence,
             classes,
             names,
+            centroid_tracker,
+            trackable_objects,
+            tracked_classes,
             threshold,
             color,
             logo_path,
             position
         )
+        global_total += total
+        print(f'[INFO] Total objects: {global_total}')
 
         out.write(img)
         pbar.update(1)

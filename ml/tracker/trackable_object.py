@@ -27,4 +27,5 @@ class TrackableObject:
 
         self.objectID = objectID
         self.centroids = [centroid]
+        self.init_position = False
         self.counted = False
