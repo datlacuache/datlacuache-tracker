@@ -20,7 +20,7 @@ def main():
     object_tracking_in_video(
         video,
         tracked_classes=['car', 'truck'],
-        threshold=0.25,
+        threshold=0.50,
         logo_path=logo,
         position='bottom'
     )
