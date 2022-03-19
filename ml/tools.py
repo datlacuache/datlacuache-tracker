@@ -145,6 +145,7 @@ def track_boxes(image, boxes, confidence, classes, names,
 
             image = draw_box(image, label, x1, y1, x2, y2, color, tag)
     
+    # TODO: Improve line -> boxes
     image = cv2.line(
         image,
         (1920 - (1920 // 16), 0),
@@ -171,6 +172,7 @@ def track_boxes(image, boxes, confidence, classes, names,
                 direction = centroid[0] - np.mean(x_centroids)
                 trackable_object.centroids.append(centroid)
 
+                # TODO: Improve line -> boxes
                 if not trackable_object.counted:
                     line_site = 1920 - (1920 // 16)
 
