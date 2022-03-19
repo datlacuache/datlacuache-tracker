@@ -1,0 +1,22 @@
+name: ml-env
+channels:
+  - conda-forge
+dependencies:
+  - tqdm
+  - numpy
+  - scipy
+  - pyyaml
+  - pandas
+  - pillow
+  - opencv
+  - pytorch
+  - tensorboard
+  - torchvision
+  - jupyterlab
+  - matplotlib
+  - imagesize
+  - requests
+  - seaborn
+  - pip
+  - pip:
+    - thop
