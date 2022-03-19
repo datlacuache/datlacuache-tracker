@@ -1,5 +1,6 @@
 # Extras
 .DS_Store
+assets/*.mp4
 runs/
 *.pt
 
