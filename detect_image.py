@@ -14,6 +14,7 @@ import cv2
 
 from ml.detect import detect_single_frame
 from ml.tools import process_boxes
+from ml.tools import display_numbers
 
 
 def main():
@@ -28,6 +29,7 @@ def main():
         tracked_classes=['person'],
         logo_path=logo
     )
+    img = display_numbers(img, 'people', 2, position='bottom')
 
     cv2.imshow('image', img)
     cv2.waitKey(0)

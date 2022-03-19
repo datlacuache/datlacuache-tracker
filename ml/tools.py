@@ -253,6 +253,45 @@ def draw_box(image, label, x1, y1, x2, y2, color, tag):
 
     return image
 
+def display_numbers(image, label, number, position='top', dx=0, dy=0,
+                    color=(255, 255, 255)):
+    """Display numbers."""
+
+    text = f'{label.capitalize()}: {number}'
+
+    y, x, _ = image.shape
+    side_value = min(x, y)
+    size = 1 + 1 / (side_value / 18)
+    padding = side_value // 60
+
+    (text_w, text_h), _ = cv2.getTextSize(
+        text, 
+        cv2.FONT_HERSHEY_SIMPLEX,
+        1,
+        2
+    )
+
+    if position == 'top':
+        x_pos = padding + dx
+        y_pos = padding + text_h + dy
+    
+    if position == 'bottom':
+        x_pos = padding + dx
+        y_pos = y - padding + dy
+
+    cv2.putText(
+        image,
+        text,
+        (x_pos, y_pos),
+        cv2.FONT_HERSHEY_SIMPLEX, 
+        size,
+        color,
+        2
+    )
+
+    return image
+
+
 
 def draw_logo(image, logo_path, position='top'):
     """Draw logo.
@@ -274,7 +313,7 @@ def draw_logo(image, logo_path, position='top'):
 
     x, y, _ = image.shape
     side_value = min(x, y)
-    size = side_value // 5
+    size = side_value // 6
     padding = side_value // 60
 
     logo = cv2.imread(logo_path, -1)

@@ -16,6 +16,7 @@ import cv2
 from ml.tracker.sort.sort import Sort
 from ml.detect import detect_single_frame
 from ml.tools import track_boxes
+from ml.tools import display_numbers
 
 
 def object_tracking_in_video(video_path, version=None, tracked_classes=None,
@@ -83,6 +84,14 @@ def object_tracking_in_video(video_path, version=None, tracked_classes=None,
         )
         global_total += total
         print(f'[INFO] Total objects: {global_total}')
+
+        img = display_numbers(
+            img,
+            'Right exit',
+            global_total,
+            position=position,
+            color=color
+        )
 
         out.write(img)
         pbar.update(1)
