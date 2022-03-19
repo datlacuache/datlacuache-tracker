@@ -43,9 +43,15 @@ def detect_single_frame(frame, version=None):
 
     print('[INFO] Detecting from frame/image')
     start = time()
+
     results = model(frame)
     names = results.names
-    results = results.xyxyn[0].numpy()
+
+    if torch.cuda.device_count():
+        results.xyxyn[0].cpu().numpy()
+    else:
+        results = results.xyxyn[0].numpy()
+
     end = time()
     print(f'[INFO] Image processed in {(end - start) * 1000:.3f} ms.')
 
