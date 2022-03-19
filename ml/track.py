@@ -54,9 +54,12 @@ def object_tracking_in_video(video_path, version=None, tracked_classes=None,
 
     print(f'[INFO] Processing video {video_path} with {total_frames} frames')
 
-    pbar = tqdm(total=total_frames)
+    pbar = tqdm(total=total_frames - 1)
     while True:
-        _, frame = vid.read()
+        ret, frame = vid.read()
+
+        if not ret:
+            break
 
         img = frame.copy()
         results = detect_single_frame(img, version=version)

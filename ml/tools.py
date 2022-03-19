@@ -14,7 +14,8 @@ import cv2
 
 
 def process_boxes(image, boxes, confidence, classes, names, threshold=0.5,
-                  color=(245, 135, 66), logo_path=None, position='top'):
+                  color=(245, 135, 66), logo_path=None, position='top',
+                  tag=True):
     """Process boxes.
 
     Parameters
@@ -33,6 +34,12 @@ def process_boxes(image, boxes, confidence, classes, names, threshold=0.5,
         Threshold to filter boxes.
     color : tuple
         Color to draw boxes.
+    logo_path : str
+        Path to logo.
+    position : str
+        Position to draw logo.
+    tag : bool
+        Tag mode. Draws class name.
     
     Returns
     -------
@@ -55,7 +62,7 @@ def process_boxes(image, boxes, confidence, classes, names, threshold=0.5,
             class_id = int(classes[index])
             label = names[class_id]
 
-            image = draw_box(image, label, x1, y1, x2, y2, color)
+            image = draw_box(image, label, x1, y1, x2, y2, color, tag)
     
     if logo_path is not None:
         draw_logo(image, logo_path, position=position)
@@ -63,7 +70,7 @@ def process_boxes(image, boxes, confidence, classes, names, threshold=0.5,
     return image
 
 
-def draw_box(image, label, x1, y1, x2, y2, color):
+def draw_box(image, label, x1, y1, x2, y2, color, tag):
     """Draw box.
 
     Parameters
@@ -82,6 +89,8 @@ def draw_box(image, label, x1, y1, x2, y2, color):
         Y2 coordinate.
     color : tuple
         Color to draw box.
+    tag : bool
+        Tag mode. Draws class name.
     
     Returns
     -------
@@ -93,28 +102,29 @@ def draw_box(image, label, x1, y1, x2, y2, color):
     cv2.rectangle(image, (x1, y1), (x2, y2), color, 2)
 
     # Draw label
-    (label_w, label_h), _ = cv2.getTextSize(
-        label, 
-        cv2.FONT_HERSHEY_SIMPLEX,
-        1,
-        2
-    )
-    cv2.rectangle(
-        image,
-        (x1, y1),
-        (x1 + label_w + 6, y1 + label_h + 12),
-        color,
-        -1
-    )
-    cv2.putText(
-        image,
-        label,
-        (x1 + 3, y1 + label_h + 3),
-        cv2.FONT_HERSHEY_SIMPLEX, 
-        1,
-        (255, 255, 255),
-        2
-    )
+    if tag:
+        (label_w, label_h), _ = cv2.getTextSize(
+            label, 
+            cv2.FONT_HERSHEY_SIMPLEX,
+            1,
+            2
+        )
+        cv2.rectangle(
+            image,
+            (x1, y1),
+            (x1 + label_w + 6, y1 + label_h + 12),
+            color,
+            -1
+        )
+        cv2.putText(
+            image,
+            label,
+            (x1 + 3, y1 + label_h + 3),
+            cv2.FONT_HERSHEY_SIMPLEX, 
+            1,
+            (255, 255, 255),
+            2
+        )
 
     return image
 

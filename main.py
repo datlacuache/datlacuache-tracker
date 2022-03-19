@@ -14,10 +14,10 @@ from ml.track import object_tracking_in_video
 
 
 def main():
-    video = 'assets/petal_20220217_160339.mp4'
-    logo = 'assets/datlacuache_white.png'
+    video = 'assets/clip.mp4'
+    logo = 'assets/datlacuache_black.png'
 
-    object_tracking_in_video(video, logo_path=logo)
+    object_tracking_in_video(video, threshold=0.25, logo_path=logo)
 
 
 if __name__ == '__main__':
