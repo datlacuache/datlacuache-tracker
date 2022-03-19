@@ -41,7 +41,7 @@ def detect_single_frame(frame, version=None):
 
     model = torch.hub.load('ultralytics/yolov5', version)
 
-    print(f'[INFO] Detecting from {frame}')
+    print('[INFO] Detecting from frame/image')
     start = time()
     results = model(frame)
     names = results.names

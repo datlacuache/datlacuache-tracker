@@ -12,11 +12,14 @@ dependencies:
   - pytorch
   - tensorboard
   - torchvision
+  - scikit-image
   - jupyterlab
   - matplotlib
   - imagesize
+  - filterpy
   - requests
   - seaborn
   - pip
   - pip:
     - thop
+    - lap
