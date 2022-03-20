@@ -50,7 +50,7 @@ def object_tracking_in_video(video_path, version=None, tracked_classes=None,
     total_frames = int(vid.get(cv2.CAP_PROP_FRAME_COUNT))
 
     output_file = video_path.split('.')[0]
-    output_file += '_processsed.mp4'
+    output_file += '_processed.mp4'
     vid_size = (width, height)
     out = cv2.VideoWriter(output_file, codec, fps, vid_size)
 
