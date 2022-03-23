@@ -10,7 +10,11 @@
 # according to the license provided and its conditions.
 # ============================================================================
 
+from tqdm import tqdm
 import torch
+import cv2
+
+from ml.tools import process_boxes
 
 from time import time
 
@@ -59,3 +63,68 @@ def detect_single_frame(frame, version=None):
     classes = results[:, 5]
 
     return boxes, confidence, classes, names
+
+
+def detect_in_video(video_path,
+                    version=None,
+                    tracked_classes=None,
+                    threshold=0.5,
+                    color=(245, 135, 66),
+                    logo_path=None,
+                    position='top',
+                    tag=True):
+    """Detects from video.
+    
+    Parameters
+    ----------
+    video_path : str
+        Path to video.
+    version : str
+        Model version.
+    tracked_classes : list
+        List of tracked classes.
+    threshold : float
+        Threshold to filter boxes.
+    color : tuple
+        Color to draw boxes.
+    logo_path : str
+        Path to logo.
+    position : str
+        Position to draw logo.
+    tag : bool
+        Tag mode. Draws class name.
+    """
+
+    # Load video capture
+    vid = cv2.VideoCapture(video_path)
+    width = int(vid.get(cv2.CAP_PROP_FRAME_WIDTH))
+    height = int(vid.get(cv2.CAP_PROP_FRAME_HEIGHT))
+    fps = int(vid.get(cv2.CAP_PROP_FPS))
+    codec = cv2.VideoWriter_fourcc(*'XVID')
+    total_frames = int(vid.get(cv2.CAP_PROP_FRAME_COUNT))
+
+    output_file = video_path.split('.')[0]
+    output_file += '_detected.mp4'
+    vid_size = (width, height)
+    out = cv2.VideoWriter(output_file, codec, fps, vid_size)
+
+    print(f'[INFO] Processing video {video_path} with {total_frames} frames')
+
+    pbar = tqdm(total=total_frames - 1)
+    while True:
+        ret, frame = vid.read()
+
+        if not ret:
+            break
+
+        img = frame.copy()
+        results = detect_single_frame(img, version=version)
+        boxes, confidence, classes, names = results
+
+        # Process boxes
+        img = process_boxes(img, boxes, confidence, classes, names,
+                            tracked_classes, threshold, color, logo_path,
+                            position, tag)
+
+        out.write(img)
+        pbar.update(1)

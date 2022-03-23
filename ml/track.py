@@ -27,7 +27,27 @@ def object_tracking_in_video(video_path,
                              color=(245, 135, 66),
                              logo_path=None,
                              position='top'):
-    """Object tracking in video."""
+    """Object tracking in video.
+    
+    Parameters
+    ----------
+    video_path : str
+        Path to the video.
+    version : str
+        Version of the model to use.
+    tracked_classes : list
+        List of classes to track.
+    tracking_params : dict
+        Parameters for tracking.
+    threshold : float
+        Threshold for detection.
+    color : tuple
+        Color for the bounding boxes.
+    logo_path : str
+        Path to the logo.
+    position : str
+        Position of the logo.
+    """
 
     # Initialize the SORT tracker
     if tracking_params is None:
