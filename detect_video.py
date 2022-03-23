@@ -10,8 +10,6 @@
 # according to the license provided and its conditions.
 # ============================================================================
 
-import cv2
-
 from ml.detect import detect_in_video
 
 
