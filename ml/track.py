@@ -19,26 +19,24 @@ from ml.tools import track_boxes
 from ml.tools import display_numbers
 
 
-def object_tracking_in_video(video_path, version=None, tracked_classes=None,
-                             tracking_params=None, threshold=0.5,
-                             color=(245, 135, 66), logo_path=None,
+def object_tracking_in_video(video_path,
+                             version=None,
+                             tracked_classes=None,
+                             tracking_params=None,
+                             threshold=0.5,
+                             color=(245, 135, 66),
+                             logo_path=None,
                              position='top'):
     """Object tracking in video."""
 
     # Initialize the SORT tracker
     if tracking_params is None:
-        tracking_params = {
-            'max_age': 10,
-            'min_hits': 2,
-            'iou_threshold': 0.25
-        }
-    
+        tracking_params = {'max_age': 10, 'min_hits': 2, 'iou_threshold': 0.25}
+
     global_total = 0
-    centroid_tracker = Sort(
-        max_age=tracking_params['max_age'],
-        min_hits=tracking_params['min_hits'],
-        iou_threshold=tracking_params['iou_threshold']
-    )
+    centroid_tracker = Sort(max_age=tracking_params['max_age'],
+                            min_hits=tracking_params['min_hits'],
+                            iou_threshold=tracking_params['iou_threshold'])
     trackable_objects = {}
 
     # Load video capture
@@ -68,30 +66,18 @@ def object_tracking_in_video(video_path, version=None, tracked_classes=None,
         boxes, confidence, classes, names = results
 
         # Process boxes
-        img, total = track_boxes(
-            img,
-            boxes,
-            confidence,
-            classes,
-            names,
-            centroid_tracker,
-            trackable_objects,
-            tracked_classes,
-            threshold,
-            color,
-            logo_path,
-            position
-        )
+        img, total = track_boxes(img, boxes, confidence, classes, names,
+                                 centroid_tracker, trackable_objects,
+                                 tracked_classes, threshold, color, logo_path,
+                                 position)
         global_total += total
         print(f'[INFO] Total objects: {global_total}')
 
-        img = display_numbers(
-            img,
-            'Right exit',
-            global_total,
-            position=position,
-            color=color
-        )
+        img = display_numbers(img,
+                              'Right exit',
+                              global_total,
+                              position=position,
+                              color=color)
 
         out.write(img)
         pbar.update(1)

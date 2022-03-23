@@ -21,5 +21,6 @@ dependencies:
   - seaborn
   - pip
   - pip:
+    - yapf
     - thop
     - lap

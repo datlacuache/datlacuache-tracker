@@ -15,7 +15,6 @@ import torch
 from time import time
 
 
-
 def detect_single_frame(frame, version=None):
     """Detects from batch of images.
 
@@ -58,5 +57,5 @@ def detect_single_frame(frame, version=None):
     boxes = results[:, :4]
     confidence = results[:, 4]
     classes = results[:, 5]
-    
+
     return boxes, confidence, classes, names
