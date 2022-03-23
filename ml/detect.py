@@ -24,8 +24,21 @@ def detect_single_frame(frame, version=None):
 
     Parameters
     ----------
-    images : list
+    frame : numpy.ndarray
+        Image.
+    version : str
+        Model version.
 
+    Returns
+    -------
+    boxes : numpy.ndarray
+        Bounding boxes.
+    confidence : numpy.ndarray
+        Confidence.
+    classes : numpy.ndarray
+        Classes.
+    names : numpy.ndarray
+        Names.
     """
 
     if version is None:
@@ -74,7 +87,7 @@ def detect_in_video(video_path,
                     position='top',
                     tag=True):
     """Detects from video.
-    
+
     Parameters
     ----------
     video_path : str
