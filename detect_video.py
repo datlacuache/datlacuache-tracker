@@ -17,7 +17,7 @@ def main():
     """Main function."""
 
     video = 'assets/test.mp4'
-    logo = 'assets/datlacuache_white.png'
+    logo = 'assets/datlacuache_black.png'
     detect_in_video(video,
                     tracked_classes=['person'],
                     logo_path=logo,
