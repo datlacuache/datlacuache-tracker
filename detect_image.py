@@ -18,6 +18,8 @@ from ml.tools import display_numbers
 
 
 def main():
+    """Main function."""
+
     image = 'assets/zidane.jpeg'
     logo = 'assets/datlacuache_white.png'
     boxes, confidence, classes, names = detect_single_frame(image)

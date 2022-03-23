@@ -14,6 +14,8 @@ from ml.track import object_tracking_in_video
 
 
 def main():
+    """Main function."""
+
     video = 'assets/clip.mp4'
     logo = 'assets/datlacuache_black.png'
 

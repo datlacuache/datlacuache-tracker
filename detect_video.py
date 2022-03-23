@@ -14,6 +14,8 @@ from ml.detect import detect_in_video
 
 
 def main():
+    """Main function."""
+
     video = 'assets/test.mp4'
     logo = 'assets/datlacuache_white.png'
     detect_in_video(video,

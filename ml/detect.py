@@ -10,13 +10,13 @@
 # according to the license provided and its conditions.
 # ============================================================================
 
+from time import time
+
 from tqdm import tqdm
 import torch
 import cv2
 
 from ml.tools import process_boxes
-
-from time import time
 
 
 def detect_single_frame(frame, version=None):
