@@ -19,6 +19,7 @@ dependencies:
   - filterpy
   - requests
   - seaborn
+  - prefect
   - pip
   - pip:
     - yapf
