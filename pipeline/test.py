@@ -45,8 +45,4 @@ with Flow('hello-flow') as flow:
     data = test_api('https://www.boredapi.com/api/activity')
     name = return_activity(data)
 
-flow.register(project_name='test-prefect')
-state = flow.run()
-
-print(state.result.get(data)._result.value)
-print(state.result.get(name)._result.value)
+flow.register(project_name='tester')
